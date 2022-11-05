@@ -2,7 +2,7 @@
 # Distributed Sorting: Sorting Algorithm and Distributed Computing
 
 ## Team Members:
-X Mark Bonner
+- Mark Bonner (pending)
 - Chris Nevares (team representative)
 - Lucas Rassbach
 

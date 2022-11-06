@@ -86,7 +86,6 @@ public:
     //overloading operator>>
     template <class U>
     friend istream& operator>>(istream& in, DoublyLinkedList<U> &);
-
     
     void printForward();
 

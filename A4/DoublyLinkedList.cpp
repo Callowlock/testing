@@ -2,13 +2,12 @@
 #include <iostream>
 
 
-// default no-argument constructor
+//default no-argument constructor
 template <class T>
 DoublyLinkedList<T>::DoublyLinkedList(){
     first = nullptr;
     last = nullptr;
     length = 0;
-    std :: cout << "C ";
 
 }
 
@@ -16,21 +15,71 @@ DoublyLinkedList<T>::DoublyLinkedList(){
 // destructor
 template <class T>
 DoublyLinkedList<T>::~DoublyLinkedList(){
-    std :: cout << " D";
+    while(!isEmpty()) {
+        deleteLast();
+    }
 
 }
 
 // copy constructor
 template <class T>
 DoublyLinkedList<T>::DoublyLinkedList(const DoublyLinkedList<T> &other){
+    if (other.length > 0) {
+        Node<T> *oth = other.first;
+        Node<T> *newNode = new Node<T>;
+        newNode->data = oth->data;
+        first = newNode;
+        first->next = nullptr;
+        length = 1;
 
+        oth = oth->next;
+        Node<T> *curr = first;
+
+        while(oth!=nullptr) {
+            Node<T> *temp = new Node<T>;
+            temp->data = oth->data;
+            curr->next = temp;
+            temp->prev = curr;
+            curr = temp;
+            oth = oth->next;
+            length++;
+        }
+        last = curr;
+        curr->next = nullptr;
+    }    
 }
 
 // copy assignment operator
 template <class T>
-DoublyLinkedList<T> DoublyLinkedList<T>::operator=(const DoublyLinkedList<T> &other){}
+DoublyLinkedList<T> DoublyLinkedList<T>::operator=(const DoublyLinkedList<T> &other){
+    if(other.length > 0) {
+        while(!isEmpty()) {
+            deleteLast();
+        }
+            
+        Node<T> *oth = other.first;
+        Node<T> *newNode = new Node<T>;
+        newNode->data = oth->data;
+        first = newNode;
+        first->next = nullptr;
+        length = 1;
 
+        oth = oth->next;
+        Node<T> *curr = first;
 
+        while(oth!=nullptr) {
+            Node<T> *temp = new Node<T>;
+            temp->data = oth->data;
+            curr->next = temp;
+            temp->prev = curr;
+            curr = temp;
+            oth = oth->next;
+            length++;
+        }
+        last = curr;
+        curr->next = nullptr;  
+    }
+}
 
 // returns true if the list is empty, false otherwise
 template <class T>
@@ -149,7 +198,8 @@ void DoublyLinkedList<T>::prev(){
 
 // returns true if the iterator is null
 template <class T>
-bool isIteratorNULL(){
+bool DoublyLinkedList<T>::isIteratorNULL(){
+    return iterator == nullptr;
 }
 
 // gets the data the iterator pointing at
@@ -161,12 +211,23 @@ T DoublyLinkedList<T>::getData(){
 // friend functions
 // overloading operator<<
 template <class U>
-ostream& operator<<(ostream &out, const DoublyLinkedList<U> &){}
+ostream& operator<<(ostream &out, const DoublyLinkedList<U> &in){
+    auto *curr = in.first;
+    out << "NULL<-";
+    while(curr->next!=nullptr) {
+        out << curr->data << "<->";
+        curr= curr->next;
+    }
+    out << curr->data << "->NULL";
+    return out;
+
+}
 
 // overloading operator>>
 template <class U>
-istream& operator>>(istream &in, DoublyLinkedList<U> &){}
+istream& operator>>(istream &in, DoublyLinkedList<U> &dLinkedList){
 
+}
 
 template <class T>
 void DoublyLinkedList<T> :: printReverse() {
@@ -177,6 +238,7 @@ void DoublyLinkedList<T> :: printReverse() {
     } while(curr!= nullptr);
 
 }
+
 template <class T>
 void DoublyLinkedList<T> :: printForward() {
     

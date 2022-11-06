@@ -77,7 +77,8 @@ DoublyLinkedList<T> DoublyLinkedList<T>::operator=(const DoublyLinkedList<T> &ot
             length++;
         }
         last = curr;
-        curr->next = nullptr;  
+        curr->next = nullptr;
+        length = other.length();  
     }
 }
 
@@ -181,7 +182,7 @@ bool DoublyLinkedList<T>::hasNext(){
 // checks if the iterator has prev
 template <class T>
 bool DoublyLinkedList<T>::hasPrev(){
-    return iterator->prev !=nullptr;
+    return iterator->prev != nullptr;
 }
 
 // sets the iterator to the next node
@@ -226,7 +227,13 @@ ostream& operator<<(ostream &out, const DoublyLinkedList<U> &in){
 // overloading operator>>
 template <class U>
 istream& operator>>(istream &in, DoublyLinkedList<U> &dLinkedList){
-
+    while(in.good()) {
+        int c = in.get();
+        if(c == '\n') {
+            break;
+        }
+        dLinkedList.insertLast((int)c-'0');
+    }
 }
 
 template <class T>

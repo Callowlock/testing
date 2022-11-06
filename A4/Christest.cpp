@@ -15,8 +15,7 @@ int main() {
     cout << list << endl;
     cout << list1 << endl;
     DoublyLinkedList<int> list3;
-    cin >> list1;
-    cout << list3;
-    cout << endl;
+    cin >> list3;
+    cout <<list3 << endl;
     return 0;
 }

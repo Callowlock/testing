@@ -16,7 +16,7 @@ int main()
     ifstream myFile;
 
     // Need to input # of rows when declaring vector
-    vector<vector<double>> v(39);
+    vector<vector<double>> v;
     
     myFile.open("AAPL.csv");
 
@@ -25,11 +25,13 @@ int main()
     while (myFile.good()) {
         getline(myFile,line);
         stringstream s(line);
+        vector<double> tempVector;
         while(getline(s, word,',')){ 
-            v[k].push_back(stod(word)); 
+            tempVector.push_back(stod(word)); 
         }   
-        k++;
+        v.push_back(tempVector);
     }
+    cout << v.size();
     for (int k = 0; k < v.size(); k++) {
         cout << k << ": ";
         for(int i = 0; i < v.at(k).size(); i++) {

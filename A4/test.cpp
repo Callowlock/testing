@@ -1,5 +1,5 @@
 #include "DoublyLinkedList.cpp"
-//#include "BigInteger.h"
+#include "BigInteger.h"
 #include <iostream>
 #include <fstream>
 
@@ -66,21 +66,24 @@ void dllTest()
 
 }
 
-/*void bigIntegerTest()
+void bigIntegerTest()
 {
 	BigInteger int1("19"), int2("300");
+
 	BigInteger actual2 = int1 - int2;
 	BigInteger expected2("-281");
 	grade(actual2 == expected2, 3);
+	cout << actual2 << endl;
 	grade(actual2.isNegative() == true, 2);
 
 	BigInteger bigInt1("55555556666666687888999");
 	grade(bigInt1.getLength() == 23, 2);
 
-	BigInteger bigInt2, bigInt3;
+	BigInteger bigInt2 = BigInteger("55555556666666687888999");
+	BigInteger bigInt3 = BigInteger("179102124556575465666776");
 	ifstream file;
 	file.open("test.txt");
-	file >> bigInt2 >> bigInt3;
+	//file >> bigInt2  >> bigInt3; this is commented out for testing other components
 	grade(bigInt2.getLength() == 23, 2);
 	grade(bigInt3.getLength() == 24, 2);
 
@@ -95,7 +98,6 @@ void dllTest()
 	BigInteger actual4 = bigInt2 - bigInt3;
 	BigInteger expected4("-123546567889908777777777");
 	grade(actual4 == expected4, 2);
-
 	grade(bigInt2 < bigInt3 == true, 1);
 
 	grade(bigInt3 >= bigInt2 == true, 1);
@@ -103,12 +105,12 @@ void dllTest()
 	BigInteger bigInt4("12345678997654321"), bigInt5("12345678997654321");
 	grade((bigInt4 <= bigInt5 == true), 1);
 
-}*/
+}
 int main()
 {
-	dllTest();          //test cases for doubly linked list implementation
+	//dllTest();          //test cases for doubly linked list implementation
 
-	//bigIntegerTest();   //test cases for big integer implementation
+	bigIntegerTest();   //test cases for big integer implementation
 
 	cout << "Test Score:" << score << endl;
 

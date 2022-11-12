@@ -33,9 +33,10 @@ public:
 
     BigInteger();
 
+
     void print();
 
-    //~BigInteger();
+    virtual ~BigInteger();
 
     int getLength();
 
@@ -59,12 +60,10 @@ public:
 
     BigInteger operator=(BigInteger item);
 
-    friend ostream& operator<<(ostream& out, BigInteger item);
+    friend ostream& operator<<(ostream& out, BigInteger& item);
 
-    friend istream& operator>>(istream& in, BigInteger item);
+    friend istream& operator>>(istream& in, BigInteger& item);
 
     
 };
-
-#include "BigInteger.cpp"
 #endif

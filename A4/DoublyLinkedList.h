@@ -16,7 +16,7 @@ protected:
     Node<T> *last;       //a pointer to the last node of the linked list
     Node<T> *iterator;   //an internal iterator for the linked list object
     int length;          //number of items in the linked list
-                                                                    
+
 public:
     //default no-argument constructor
     DoublyLinkedList();  

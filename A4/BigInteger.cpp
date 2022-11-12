@@ -1,5 +1,5 @@
 #include "BigInteger.h"
-#include "DoublyLinkedList.h"
+#include "DoublyLinkedList.cpp"
 #include <iostream>
 
 using namespace std;
@@ -10,7 +10,7 @@ BigInteger::BigInteger(string input){
     int firstChar;
     int i = 1;
     if (input[0] == '-'){
-        this->sign = true;
+        this->setSign(true);
         firstChar = input[1] - '0';
         i++;
     }
@@ -34,7 +34,11 @@ BigInteger::BigInteger(string input){
 //default constructor
 BigInteger::BigInteger(){
     storage = new DoublyLinkedList<int>();
+    //cout << " C " << endl;
     sign = false;
+}
+
+BigInteger::~BigInteger() {
 }
 
 //returns true if negative
@@ -548,12 +552,13 @@ bool BigInteger::operator<=(BigInteger item){
 
 //overload assignment = operator
 BigInteger BigInteger::operator=(BigInteger item){
+    cout << "hi";
     storage = item.storage;
-    sign = item.isNegative();
+    sign = item.sign;
 }
 
 //overload << operator
-ostream& operator<<(ostream& out, BigInteger item){
+ostream& operator<<(ostream& out, BigInteger& item){
     string s = "";
     if (item.isNegative()){
         s = s + "-";
@@ -568,24 +573,21 @@ ostream& operator<<(ostream& out, BigInteger item){
 }
 
 /*TODO overload >> operator*/
-istream& operator>>(istream& in, BigInteger item){
+istream& operator>>(istream& in, BigInteger& item){
     bool tempBool = false;
-    string s = "";
     while(in.good()) {
         char c = in.get();
         if(c == '\n'){
             break;
         }
-        else if(c == '-'){
-            tempBool = true;
+        if(c == '-'){
+            item.setSign(true);
+
         }
         else {
-            s = s + std::to_string(c - '0');
+            item.storage->insertLast((int)c - '0');
         }
     }
-    item = BigInteger(s);
-    item.print();
-    item.setSign(tempBool);
 
 }
 

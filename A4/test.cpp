@@ -108,7 +108,7 @@ void bigIntegerTest()
 }
 int main()
 {
-	//dllTest();          //test cases for doubly linked list implementation
+	dllTest();          //test cases for doubly linked list implementation
 
 	bigIntegerTest();   //test cases for big integer implementation
 

@@ -1,7 +1,15 @@
-#ifndef BIGINTEGER_
-#define BIGINTEGER_
-
+#ifndef BIGINTEGER_H_
+#define BIGINTEGER_H_
+#include <stdexcept>
 #include "DoublyLinkedList.h"
+
+// Error class to deal with invalid inputs
+class IllegalArgumentException : public exception {
+    public:
+        IllegalArgumentException() {
+        }    
+};
+
 
 class BigInteger
 {
@@ -23,7 +31,8 @@ private:
 
     bool checkZero();
 
-    void trimZero();    
+    void trimZero();
+        
 
 public:
 
@@ -60,10 +69,12 @@ public:
 
     BigInteger operator=(BigInteger item);
 
-    friend ostream& operator<<(ostream& out, BigInteger& item);
+    friend ostream& operator<<(ostream& out, BigInteger item);
 
-    friend istream& operator>>(istream& in, BigInteger& item);
+    friend istream& operator>>(istream& in, BigInteger item);
 
     
 };
+
+//#include "BigInteger.cpp"
 #endif

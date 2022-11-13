@@ -1,40 +1,34 @@
-#include "BigInteger.h"
-#include "DoublyLinkedList.cpp"
-#include <iostream>
+#ifndef BIGINTEGER_CPP_
+#define BIGINTEGER_CPP_
 
+#include "BigInteger.h"
+#include <iostream>
 using namespace std;
 
-//constructor with string
+
+//constructor with string, throws error if invalid input
 BigInteger::BigInteger(string input){
-    /*TODO handle a negative integer*/
-    int firstChar;
-    int i = 1;
-    if (input[0] == '-'){
-        this->setSign(true);
-        firstChar = input[1] - '0';
+    int i = 0;
+    sign = false;
+    storage = new DoublyLinkedList<int>();
+    if (input[0]=='-') {
+        sign = true;
         i++;
     }
-    else {
-        this->sign = false;
-        firstChar = input[0] - '0';
-    }
-    storage = new DoublyLinkedList<int>();
-    if (input[0] - '0' > 9){
-        /*TODO throw exception*/
-    }
-    storage->insertFirst(firstChar);
-    for (i; i < input.length(); i++){
-        if (input[i] - '0' > 9){
-            /*TODO throw exception*/
+    for(i; i < input.length(); i++) {
+        if((int)input[i] < 48 || (int)input[i] > 57) {
+            storage->clear();
+            throw IllegalArgumentException();
+        } else {
+            storage->insertLast((int)input[i] - '0');
         }
-        storage->insertLast(input[i] - '0');
-    }
+    } 
+
 }
 
 //default constructor
 BigInteger::BigInteger(){
     storage = new DoublyLinkedList<int>();
-    //cout << " C " << endl;
     sign = false;
 }
 
@@ -552,42 +546,40 @@ bool BigInteger::operator<=(BigInteger item){
 
 //overload assignment = operator
 BigInteger BigInteger::operator=(BigInteger item){
-    cout << "hi";
     storage = item.storage;
     sign = item.sign;
 }
 
 //overload << operator
-ostream& operator<<(ostream& out, BigInteger& item){
-    string s = "";
+ostream& operator<<(ostream& out, BigInteger item){
     if (item.isNegative()){
-        s = s + "-";
+        out << '-';
     }
     item.storage->setIteratorFirst();
     while (!item.storage->isIteratorNULL()){
-        s = s + std::to_string(item.storage->getData());
+        out << item.storage->getData();
         item.storage->next();
     }
-    out << s;
     return out;
 }
 
 /*TODO overload >> operator*/
-istream& operator>>(istream& in, BigInteger& item){
+istream& operator>>(istream& in, BigInteger item){
     bool tempBool = false;
-    while(in.good()) {
-        char c = in.get();
-        if(c == '\n'){
-            break;
+        while(in.good()) {
+            char c = in.get();
+            if(c == '\n' || in.good() == false){
+                break;
+            } else if(c == '-'){
+                item.setSign(true);
+            } else if ((int)c < 48 || (int)c > 57) {
+                item.storage->clear();
+                throw IllegalArgumentException();
+            } else {
+                item.storage->insertLast((int)c - '0');
+            }
         }
-        if(c == '-'){
-            item.setSign(true);
-
-        }
-        else {
-            item.storage->insertLast((int)c - '0');
-        }
-    }
+   return in;
 
 }
 
@@ -601,3 +593,4 @@ void BigInteger::print(){
     }
     cout << endl;
 }
+#endif

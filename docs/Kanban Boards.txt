@@ -1,9 +1,0 @@
-Hey all,
-
-Kanban boards are live. Here they are:
-
-Station Node:
-https://trello.com/invite/b/t3zkFfm4/ATTId4d7c46e80f62ee832a5779cf498ea62BE2DC56B/station-node-cs-300-extra-project-large-data-sort
-
-Worker Node:
-https://trello.com/invite/b/F7t0hHOT/ATTIcb55779a078fcb14abfdc97bbf13fe8bFA640349/worker-node-cs-300-extra-project-large-data-sort

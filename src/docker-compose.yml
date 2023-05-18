@@ -1,8 +1,0 @@
-version: '3.4'
-
-services:
-  cs300au22team3:
-    image: cs300au22team3
-    build:
-      context: .
-      dockerfile: ./Dockerfile
